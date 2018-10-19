@@ -1,0 +1,55 @@
+<html xmlns:th="www.thymeleaf.org">  
+<head>  
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <title>Spring Boot Facebook Application</title>
+</head>
+
+<body>  
+<!-- Page Content -->  
+<div class="container">  
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 class="mt-5">Connect to Facebook:</h1>
+            <p class="lead">By clicking connect, you will be asked to authorize the application.</p>
+
+                <input type="hidden" name="scope" value="user_posts"/>
+
+                <button class="btn btn-default" type="submit" onclick="myLogin()">Connect</button>
+
+        </div>
+    </div>
+</div>  
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '710653895983634',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.1'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
+
+	function myLogin(){
+		FB.login(function(response){
+			console.log('successfully logged', response);
+		}, {scope:'manage_pages'})
+	}
+
+</script>
+
+
+</body>  
+</html> 
